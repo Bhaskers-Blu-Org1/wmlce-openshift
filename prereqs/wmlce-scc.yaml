@@ -1,0 +1,23 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: wmlce-scc
+  labels:
+    release: "1.6.2"
+allowPrivilegedContainer: true
+allowedCapabilities:
+  - AUDIT_WRITE
+  - CHOWN
+  - FOWNER
+  - SETUID
+  - SETGID
+  - SYS_CHROOT
+  - DAC_OVERRIDE
+  - NET_BIND_SERVICE
+  - IPC_LOCK
+  - SYS_PTRACE
+  - SYS_RESOURCE
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny

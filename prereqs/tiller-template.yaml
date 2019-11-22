@@ -1,0 +1,100 @@
+kind: Template
+apiVersion: v1
+objects:
+- kind: ServiceAccount
+  apiVersion: v1
+  metadata:
+    name: tiller
+
+- kind: ClusterRole
+  apiVersion: v1
+  metadata:
+    name: tiller
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - configmaps
+    verbs:
+    - create
+    - get
+    - list
+    - update
+    - delete
+  - apiGroups:
+    - ""
+    resources:
+    - namespaces
+    verbs:
+    - get
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get","list", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["create","delete","get","list","patch","update","watch"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["create","delete","get","list","patch","update","watch"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["create","delete","get","list","patch","update","watch"]
+  - apiGroups: ["extensions"]
+    resources: ["deployments", "deployments/scale", "deployments.apps"]
+    verbs: ["create","delete","get","list","patch","update","watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+
+- kind: ClusterRoleBinding
+  apiVersion: v1
+  metadata:
+    name: tiller
+  roleRef:
+    name: tiller    
+  subjects:
+  - kind: SystemGroup
+    name: system:masters
+
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    name: tiller
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: helm
+        name: tiller
+    template:
+      metadata:
+        labels:
+          app: helm
+          name: tiller
+      spec:
+        containers:
+        - name: tiller
+          image:  <tiller image>
+          env:
+          - name: TILLER_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          ports:
+          - name: tiller
+            containerPort: 44134
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 44135
+          livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 44135
+        serviceAccountName: tiller
+parameters:
+- name: HELM_VERSION
+  value: ${HELM_VERSION}
+  required: true
+- name: TILLER_NAMESPACE
+  required: true

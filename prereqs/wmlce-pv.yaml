@@ -1,0 +1,13 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: wmlce-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    -  ReadWriteOnce
+  hostPath:
+    path: "/wmlce/data"
