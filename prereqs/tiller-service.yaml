@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: helm
+    name: tiller
+  name: tiller
+spec:
+  clusterIP: 172.30.0.11
+  ports:
+  - name: tiller
+    port: 44134
+    protocol: TCP
+    targetPort: 44134
+  selector:
+    app: helm
+    name: tiller
