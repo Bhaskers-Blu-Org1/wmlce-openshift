@@ -12,7 +12,7 @@
 # Prerequisites
 
 - Kubernetes v1.11.3 or later with GPU scheduling enabled, and Tiller v2.7.2 or later
-- The application must run on nodes with *supported GPUs* [see IBM WML CE V1.6.2 release notes](https://developer.ibm.com/linuxonpower/deep-learning-powerai/releases/).  
+- The application must run on nodes with *supported GPUs* [see IBM WML CE V1.7.0 release notes](https://developer.ibm.com/linuxonpower/deep-learning-powerai/releases/).  
 - Helm 2.7.2 and later version
 
 

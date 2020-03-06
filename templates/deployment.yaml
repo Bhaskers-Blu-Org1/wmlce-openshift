@@ -47,7 +47,7 @@ spec:
       annotations:
         productName: "WML CE"
         productID: "5765-PAI"
-        productVersion: "1.6.2"
+        productVersion: "1.7.0"
 
     spec:
       hostNetwork: false

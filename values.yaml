@@ -14,7 +14,7 @@
 
 image:
   repository: registry.connect.redhat.com/ibm/wmlce
-  tag: wmlce-1.6.2-py36-ppc64le-2
+  tag: wmlce-1.7.0-py37-ppc64le-4
   pullPolicy: IfNotPresent
 
 service:

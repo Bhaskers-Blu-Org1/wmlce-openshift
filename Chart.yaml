@@ -11,7 +11,7 @@
 
 name: ibm-wmlce
 description: IBM Watson Machine Learning Community Edition
-version: 1.6.2
+version: 1.7.0
 productID: "5765-PAI"
 keywords:
   - ppc64le
@@ -19,7 +19,7 @@ keywords:
   - Limited
   - OCP
   - AI
-appVersion: 1.6.2
+appVersion: 1.7.0
 icon:
 kubeVersion: ">=1.11.0"
 tillerVersion: ">=2.9.1"
