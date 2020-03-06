@@ -23,7 +23,7 @@ IBM WML CE incorporates some of the most popular deep learning frameworks, along
 ## Prerequisites
 
 - Kubernetes v1.11.3 or later with GPU scheduling enabled, and Tiller v2.9.1 or later (Refer to the Install Tiller and Helm section)
-- The application must run on nodes with *supported GPUs* [see IBM WML CE V1.6.2 release notes](https://developer.ibm.com/linuxonpower/deep-learning-powerai/releases/).  
+- The application must run on nodes with *supported GPUs* [see IBM WML CE V1.7.0 release notes](https://developer.ibm.com/linuxonpower/deep-learning-powerai/releases/).  
 - Helm 2.9.1 or later 
 - Refer to the [Enabling GPUs in OpenShift](https://developer.ibm.com/linuxonpower/2019/11/19/enabling-gpus-in-openshift-3-11/) section to configure on GPU nodes.
 - If you wish to leverage persistent storage for data sets and/or runtime code, you should enable `persistence.enabled=true` and create your persistent volume prior to deploying the chart (unless you use `dynamic provisioning`). It can be created by using a yaml file as in the following example:
@@ -177,11 +177,11 @@ $ docker login registry.connect.redhat.com
 Username: ${REGISTRY-SERVICE-ACCOUNT-USERNAME}
 Password: ${REGISTRY-SERVICE-ACCOUNT-PASSWORD}
 
-$ docker pull registry.connect.redhat.com/ibm/wmlce:wmlce-1.6.2-py36-<arch>-2
+$ docker pull registry.connect.redhat.com/ibm/wmlce:wmlce-1.7.0-py37-<arch>-4
 
-where arch = ppc64le or x86-64
+where arch = ppc64le or x86_64
 ```
-The default value wmlce-1.6.2-py36-ppc64le-2 is set in values.yaml. If you want to use differnt tag, update values.yaml with the correct image tag or update the tag during deployment.
+The default value wmlce-1.7.0-py37-ppc64le-4 is set in values.yaml. If you want to use differnt tag, update values.yaml with the correct image tag or update the tag during deployment.
 
 4. Install the chart.  In this example, it has the release name `my-release`:
 
@@ -221,13 +221,13 @@ $ oc delete pv <name_of_pv>
 ```
 
 ## Configuration
-The following table lists the configurable parameters of the `ibm-wmlce-dev` chart and their default values.
+The following table lists the configurable parameters of the `ibm-wmlce` chart and their default values.
 
 | Parameter                        | Description                                     | Default                                                    |
 | -------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
 | `license`                        | Set `license=accept` to accept the terms of the license | `Not accepted`                                     |
 | `image.repository`               | WMLCE image repository.          | `registry.connect.redhat.com/ibm/wmlce`                       |
-| `image.tag`                      | Docker Image tag. To get the tag of other images, visit " https://access.redhat.com/containers/?tab=tags#/registry.connect.redhat.com/ibm/wmlce"                                    | `wmlce-1.6.2-py36-ppc64le-2`                                                        |
+| `image.tag`                      | Docker Image tag. To get the tag of other images, visit " https://access.redhat.com/containers/?tab=tags#/registry.connect.redhat.com/ibm/wmlce"                                    | `wmlce-1.7.0-py37-ppc64le-4`                                                        |
 | `image.pullPolicy`               | Docker Image pull policy (Options - IfNotPresent, Always, Never)                              | `IfNotPresent`                                             |
 | `global.image.secretName`               | Docker Image pull secret, if you are using a private Docker registry | `nil`                                        |
 | `service.type`                   | Kubernetes service type for exposing ports (Options - ClusterIP, None)       | `nil`                                  |
@@ -259,6 +259,8 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 ```bash
 $ helm install --name my-release --set license=accept resources.gpu=1 <chartname>
 ``` 
+
+Note : To Deploy WML CE for DML and DDL tests follow https://developer.ibm.com/linuxonpower/2018/10/04/distributed-deep-learning-ibm-cloud-private/
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart.
 > **Tip**: The default values are in the values.yaml file of the WMLCE chart.

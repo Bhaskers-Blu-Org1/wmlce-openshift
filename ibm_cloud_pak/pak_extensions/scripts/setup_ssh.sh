@@ -11,7 +11,7 @@ gpgcheck = 1" > /etc/yum.repos.d/centos.repo
 rpm --import http://mirror.centos.org/altarch/7/os/ppc64le/RPM-GPG-KEY-CentOS-7
 rpm --import http://mirror.centos.org/altarch/7/os/ppc64le/RPM-GPG-KEY-CentOS-SIG-AltArch-7-ppc64le
 yum repolist && yum install -y openssh-server openssh-clients
-yum install -y wget perl numactl-libs gtk2 atk cairo gcc-gfortran tcsh libnl3 libmnl tcl tk
+yum install -y wget perl numactl-libs gtk2 atk cairo gcc-gfortran tcsh libnl3 libmnl tcl tk hostname
 wget https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/7/ppc64le/Packages/p/p7zip-plugins-16.02-10.el7.ppc64le.rpm
 wget https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/7/ppc64le/Packages/p/p7zip-16.02-10.el7.ppc64le.rpm
 rpm -U --quiet p7zip-16.02-10.el7.ppc64le.rpm

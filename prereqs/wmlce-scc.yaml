@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: wmlce-scc
   labels:
-    release: "1.6.2"
+    release: "1.7.0"
 allowPrivilegedContainer: true
 allowedCapabilities:
   - AUDIT_WRITE
